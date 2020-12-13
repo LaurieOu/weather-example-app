@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<head>
+</head>
+
+<!-- DOM -->
+<body>
+    <div id="root">
+        <div></div>
+    </div>
+</body>
+
+<footer>
+    <script>
+        const weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=London&appid=1f34e3e5d2a2f89d1f52bdf06974edf8";
+
+
+        const manipulateDOM = (weatherData) => {
+            // make JS interact with the DOM
+            console.log("document", document)
+            const root = document.getElementById('root');
+            const temperature = weatherData.main.temp;
+            root.textContent = "The temperature in London is currently " + temperature;
+            console.log("weatherData", weatherData)
+        }
+
+        //AJAX request
+        //https://www.kirupa.com/html5/making_http_requests_js.htm
+        fetch(weatherURL) //Promise   
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            // console.log("AJAX response",  myJson);
+            manipulateDOM(myJson)
+
+        })
+        .catch(function (error) {
+            console.log("Error: " + error);
+        });
+
+        //XML request 
+        // const Http = new XMLHttpRequest();
+        // Http.open("GET", weatherURL);
+        // Http.send();
+
+        // Http.onreadystatechange = (e) => {
+        //     console.log("XML response: ", Http.responseText)
+        // }
+
+
+        
+    </script>
+
+</footer>
+
+
+</html>
